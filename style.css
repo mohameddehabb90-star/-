@@ -1,0 +1,1729 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --ink: #203b39;
+  --deep: #173b3a;
+  --deep-2: #285451;
+  --gold: #c5a46a;
+  --paper: #f7f5ef;
+  --muted: #74817c;
+  --line: #e5e4dc;
+  --white: #fff;
+  --shadow: 0 12px 35px rgba(26, 53, 49, .10);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 155px;
+}
+
+body {
+  font-family: 'Cairo', Tahoma, Arial, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.8;
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* الشريط العلوي */
+
+.top-strip {
+  height: 36px;
+  background: #fff;
+  border-bottom: 1px solid #edf0eb;
+  color: #61716c;
+  font-size: 12px;
+}
+
+.top-inner {
+  max-width: 1280px;
+  height: 100%;
+  padding: 0 28px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top-actions {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+
+.text-button {
+  border: 0;
+  background: transparent;
+  color: #50625e;
+  font-size: 12px;
+  transition: color .2s;
+}
+
+.text-button:hover {
+  color: var(--gold);
+}
+
+.count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  margin-right: 4px;
+  border-radius: 20px;
+  background: #e9e3d5;
+  color: var(--deep);
+  font-size: 11px;
+}
+
+/* القائمة الرئيسية */
+
+.main-nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(25, 55, 51, .06);
+}
+
+.main-nav {
+  max-width: 1280px;
+  min-height: 82px;
+  padding: 12px 28px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--deep);
+  font-size: 22px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px 5px 12px 5px;
+  background: var(--deep);
+  color: #f5e8cb;
+  font-size: 23px;
+  transform: rotate(-5deg);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(690px, 65%);
+  min-width: 0;
+}
+
+/* البحث والاقتراحات */
+
+.search-container {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 44px;
+  padding: 0 17px;
+  border: 1px solid #e4e8e2;
+  border-radius: 30px;
+  background: #f8f9f6;
+  color: #63736e;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.search-wrap:focus-within {
+  border-color: #9aaf9f;
+  box-shadow: 0 0 0 3px rgba(39, 91, 81, .08);
+}
+
+.search-wrap span {
+  font-size: 25px;
+  line-height: 1;
+}
+
+.search-wrap input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 9px);
+  right: 0;
+  left: 0;
+  z-index: 100;
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 7px;
+  border: 1px solid #e5e7df;
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 15px 35px rgba(23, 59, 58, .15);
+}
+
+.search-suggestions[hidden] {
+  display: none;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--deep);
+  text-align: right;
+  transition: background .2s;
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+  background: #f0f4ee;
+}
+
+.suggestion-cover {
+  flex: 0 0 37px;
+  width: 37px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #e5e9df;
+}
+
+.suggestion-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.suggestion-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.suggestion-info strong {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.suggestion-info small {
+  color: #87918b;
+  font-size: 10px;
+}
+
+.search-no-results {
+  padding: 13px;
+  color: #849088;
+  text-align: center;
+  font-size: 12px;
+}
+
+.favorites-trigger {
+  height: 44px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 25px;
+  background: var(--deep);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+  transition: background .2s, transform .2s;
+}
+
+.favorites-trigger:hover {
+  background: var(--deep-2);
+  transform: translateY(-2px);
+}
+
+/* القسم الرئيسي */
+
+.hero {
+  position: relative;
+  min-height: calc(100vh - 176px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(110deg, rgba(15,45,43,.94), rgba(25,66,62,.73)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1800&q=85')
+    center 48% / cover;
+  color: #fff;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(7,26,26,.15), rgba(7,26,26,.35));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: min(1280px, 100%);
+  padding: 75px 7%;
+  margin: auto;
+}
+
+.eyebrow {
+  color: #e1c995;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  margin-bottom: 8px;
+}
+
+.eyebrow.dark {
+  color: #a3844e;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 5vw, 65px);
+  font-weight: 900;
+  line-height: 1.35;
+  margin-bottom: 20px;
+}
+
+.hero-description {
+  max-width: 750px;
+  color: #f0f2ed;
+  font-size: 17px;
+  line-height: 2.2;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+  padding: 13px 27px;
+  border: 1px solid rgba(255,255,255,.6);
+  border-radius: 30px;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  transition: .2s;
+}
+
+.hero-link:hover {
+  background: #fff;
+  color: var(--deep);
+}
+
+.hero-note {
+  position: absolute;
+  left: 6%;
+  bottom: 25px;
+  color: #f4e6c9;
+  font-size: 12px;
+}
+
+.hero-note span {
+  color: var(--gold);
+}
+
+/* شريط الأقسام */
+
+.category-nav {
+  position: sticky;
+  top: 82px;
+  z-index: 40;
+  background: rgba(255,255,255,.97);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 5px 16px rgba(25,55,51,.04);
+}
+
+.category-nav-inner {
+  max-width: 1280px;
+  min-height: 58px;
+  padding: 8px 25px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.category-card {
+  position: relative;
+  flex: 0 0 auto;
+  border: 0;
+  padding: 9px 15px;
+  background: transparent;
+  color: #65736e;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color .2s;
+}
+
+.category-card::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  border-radius: 5px;
+  background: var(--gold);
+  transition: width .35s ease;
+}
+
+.category-card:hover,
+.category-card.active {
+  color: var(--deep);
+}
+
+.category-card:hover::after,
+.category-card.active::after {
+  width: 100%;
+}
+
+/* أقسام الكتب */
+
+.section {
+  max-width: 1280px;
+  padding-left: 28px;
+  padding-right: 28px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.intro-row {
+  padding-top: 42px;
+  padding-bottom: 18px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.section-title {
+  color: var(--deep);
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+.section-subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+.book-total {
+  padding: 6px 14px;
+  border: 1px solid #e1ddcf;
+  border-radius: 20px;
+  color: #7b6a4c;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.books-section {
+  padding-top: 16px;
+  padding-bottom: 50px;
+  scroll-margin-top: 160px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.section-heading h2 {
+  color: var(--deep);
+  font-size: 18px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.heading-line {
+  height: 1px;
+  flex: 1;
+  background: var(--line);
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 25px 20px;
+}
+
+.book-card {
+  min-width: 0;
+  position: relative;
+  padding: 11px 11px 14px;
+  border: 1px solid #ece9df;
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 5px 16px rgba(30,56,50,.045);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  scroll-margin-top: 170px;
+}
+
+.book-card:hover {
+  transform: translateY(-7px);
+  border-color: #d6c49e;
+  box-shadow: var(--shadow);
+}
+
+.book-card.search-highlight {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(197,164,106,.25), var(--shadow);
+  animation: searchPulse 1.2s ease;
+}
+
+@keyframes searchPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(197,164,106,.25); }
+  50% { box-shadow: 0 0 0 7px rgba(197,164,106,.10); }
+}
+
+.cover-wrap {
+  position: relative;
+  height: 205px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #e6e8df;
+}
+
+.book-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .35s ease;
+}
+
+.book-card:hover .book-cover {
+  transform: scale(1.045);
+}
+
+/* غلاف بديل بدون أيقونة */
+
+.cover-placeholder {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 18px;
+  text-align: center;
+  color: white;
+  background:
+    linear-gradient(180deg, rgba(15,45,43,.05), rgba(15,45,43,.88)),
+    linear-gradient(135deg, #78918a, #c5a46a);
+}
+
+.cover-placeholder strong {
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.book-card h3 {
+  margin: 12px 0 4px;
+  color: #263f3c;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.8;
+  min-height: 50px;
+}
+
+.book-card .book-category {
+  color: #9a8053;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.book-card .book-description {
+  color: #78827d;
+  font-size: 11px;
+  line-height: 1.8;
+  min-height: 40px;
+  margin-top: 5px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.card-actions button {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 5px;
+  border: 1px solid #dce3dc;
+  border-radius: 8px;
+  background: #f8faf7;
+  color: var(--deep);
+  font-size: 11px;
+  font-weight: 800;
+  transition: .2s;
+}
+
+.card-actions button:hover {
+  background: var(--deep);
+  color: #fff;
+  border-color: var(--deep);
+}
+
+.card-actions .icon-action {
+  flex: 0 0 36px;
+  font-size: 16px;
+}
+
+.card-actions .icon-action.is-active {
+  color: #a24e4e;
+  background: #fff4f1;
+  border-color: #efd5ce;
+}
+
+.empty-message {
+  grid-column: 1/-1;
+  padding: 30px;
+  text-align: center;
+  color: #78827d;
+  background: #fff;
+  border: 1px dashed #d8ded6;
+  border-radius: 12px;
+}
+
+.secondary-section {
+  padding-top: 28px;
+  padding-bottom: 55px;
+  border-top: 1px solid var(--line);
+}
+
+/* التذييل */
+
+footer {
+  padding: 34px 15px;
+  text-align: center;
+  background: #173b3a;
+  color: #dce7df;
+}
+
+.footer-brand {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+footer p {
+  margin: 5px 0 12px;
+  color: #c2d0c8;
+  font-size: 12px;
+}
+
+footer small {
+  color: #9eafa5;
+  font-size: 11px;
+}
+
+/* النوافذ المنبثقة */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(10,26,25,.68);
+  backdrop-filter: blur(4px);
+}
+
+.modal-backdrop.open {
+  display: flex;
+  animation: fadeIn .2s ease;
+}
+
+.modal {
+  position: relative;
+  width: min(470px, 100%);
+  max-height: min(88vh, 900px);
+  overflow-y: auto;
+  padding: 34px;
+  border: 1px solid #e7dfce;
+  border-radius: 18px;
+  background: #fffefa;
+  box-shadow: 0 25px 80px rgba(0,0,0,.25);
+  animation: modalIn .25s ease;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  left: 15px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: #f0eee7;
+  color: #40534d;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  background: #e4ded0;
+}
+
+.modal h2 {
+  color: var(--deep);
+  font-size: 23px;
+  font-weight: 900;
+}
+
+.modal-muted {
+  margin: 4px 0 20px;
+  color: #7d8982;
+  font-size: 12px;
+}
+
+.modal-symbol {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  background: #e9eee7;
+  color: var(--deep);
+  font-size: 24px;
+}
+
+.login-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-modal label {
+  margin-top: 5px;
+  color: #40554e;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.login-modal input {
+  height: 45px;
+  padding: 0 13px;
+  border: 1px solid #dfe4dc;
+  border-radius: 9px;
+  outline: 0;
+  background: #fbfcf9;
+}
+
+.login-modal input:focus {
+  border-color: #9aaf9f;
+}
+
+.primary-button,
+.outline-button,
+.eye-button,
+.close-reader {
+  padding: 9px 17px;
+  border: 1px solid var(--deep);
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: .2s;
+}
+
+.primary-button {
+  background: var(--deep);
+  color: white;
+}
+
+.primary-button:hover {
+  background: var(--deep-2);
+}
+
+.outline-button {
+  background: #fff;
+  color: var(--deep);
+}
+
+.outline-button:hover {
+  background: #edf2ed;
+}
+
+.full-button {
+  width: 100%;
+  margin-top: 13px;
+}
+
+.form-note {
+  margin-top: 15px;
+  color: #9a9d94;
+  font-size: 10px;
+  text-align: center;
+}
+
+/* قوائم Reader والمفضلة */
+
+.list-modal {
+  width: min(620px, 100%);
+}
+
+.saved-books-list {
+  display: grid;
+  gap: 9px;
+}
+
+.saved-book-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid #e9e9e1;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.saved-book-thumb {
+  flex: 0 0 45px;
+  width: 45px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #dce5dc;
+}
+
+.saved-book-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.saved-book-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.saved-book-info strong {
+  display: block;
+  color: var(--deep);
+  font-size: 12px;
+}
+
+.saved-book-info small {
+  color: #87918b;
+  font-size: 10px;
+}
+
+.saved-book-row button {
+  padding: 6px 10px;
+  border: 1px solid #dce3dc;
+  border-radius: 7px;
+  background: #f7faf6;
+  color: var(--deep);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.saved-book-row .remove-read {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fff0ed;
+  color: #b64b43;
+  font-size: 21px;
+  line-height: 1;
+  transition: .2s;
+}
+
+.saved-book-row .remove-read:hover {
+  background: #b64b43;
+  color: #fff;
+}
+
+.saved-empty {
+  padding: 24px;
+  text-align: center;
+  color: #89938b;
+  font-size: 13px;
+  background: #f8f8f3;
+  border-radius: 10px;
+}
+
+/* قارئ الكتاب */
+
+.reader-backdrop {
+  z-index: 110;
+}
+
+.book-modal {
+  width: min(900px, 100%);
+  padding: 30px;
+}
+
+.book-reader-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 0 28px 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+#readerTitle {
+  color: var(--deep);
+  font-size: 23px;
+  font-weight: 900;
+}
+
+#readerAuthor {
+  color: #8a928b;
+  font-size: 12px;
+}
+
+.chapter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 17px 0;
+}
+
+.chapter-pill {
+  padding: 6px 12px;
+  border: 1px solid #dce3d9;
+  border-radius: 20px;
+  background: #f8faf6;
+  color: #50645a;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.chapter-pill.active,
+.chapter-pill:hover {
+  background: var(--deep);
+  border-color: var(--deep);
+  color: white;
+}
+
+.reading-paper {
+  min-height: 280px;
+  padding: 24px clamp(15px, 5vw, 55px);
+  border: 1px solid #eee7d8;
+  border-radius: 12px;
+  background: #fffdf7;
+}
+
+#chapterTitle {
+  margin-bottom: 17px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e9e1d0;
+  color: #765f3c;
+  font-size: 18px;
+}
+
+#pageText {
+  color: #46534c;
+  font-size: 14px;
+  line-height: 2.35;
+  text-align: justify;
+}
+
+#pageText strong {
+  color: var(--deep);
+  font-size: 15px;
+}
+
+.reader-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.reader-controls button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.page-number {
+  color: #8a7959;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.reader-bottom-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 15px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.eye-button {
+  border-color: #d7e2d8;
+  background: #eef4ee;
+  color: var(--deep);
+}
+
+.eye-button:hover {
+  background: #dfece0;
+}
+
+.close-reader {
+  border-color: #e8d5d1;
+  background: #fff6f3;
+  color: #92534a;
+}
+
+.close-reader:hover {
+  background: #f8e7e2;
+}
+
+/* رسائل التنبيه */
+
+.toast {
+  position: fixed;
+  z-index: 200;
+  right: 50%;
+  bottom: 25px;
+  transform: translate(50%, 20px);
+  padding: 10px 18px;
+  border-radius: 25px;
+  background: var(--deep);
+  color: white;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s;
+  box-shadow: var(--shadow);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(50%, 0);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(12px) scale(.98); }
+  to { opacity: 1; transform: none; }
+}
+
+/* الشاشات المتوسطة */
+
+@media (max-width: 1000px) {
+  .books-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .cover-wrap {
+    height: 190px;
+  }
+}
+
+@media (max-width: 720px) {
+  .main-nav {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+    padding: 13px 16px;
+  }
+
+  .brand {
+    font-size: 18px;
+  }
+
+  .nav-actions {
+    width: 100%;
+  }
+
+  .hero {
+    min-height: 75vh;
+  }
+
+  .hero-content {
+    padding: 55px 25px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+  }
+
+  .hero-note {
+    display: none;
+  }
+
+  .category-nav {
+    top: 105px;
+  }
+
+  .category-nav-inner {
+    justify-content: flex-start;
+    padding: 6px 12px;
+  }
+
+  .section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+  }
+
+  .cover-wrap {
+    height: 175px;
+  }
+
+  .book-card {
+    padding: 8px;
+  }
+
+  .book-card h3 {
+    font-size: 12px;
+    min-height: 45px;
+  }
+
+  .book-card .book-description {
+    display: none;
+  }
+
+  .card-actions {
+    flex-wrap: wrap;
+  }
+
+  .card-actions button {
+    font-size: 10px;
+  }
+
+  .intro-row {
+    align-items: start;
+  }
+
+  .section-title {
+    font-size: 22px;
+  }
+
+  .book-modal {
+    padding: 22px 15px;
+  }
+
+  .book-reader-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* الموبايل */
+
+@media (max-width: 460px) {
+  .top-inner {
+    padding: 0 12px;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cover-wrap {
+    height: 195px;
+  }
+
+  .hero h1 {
+    font-size: 29px;
+  }
+
+  .modal {
+    padding: 28px 20px;
+  }
+
+  .reader-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page-number {
+    order: -1;
+    width: 100%;
+  }
+
+  .saved-book-row {
+    gap: 7px;
+    padding: 8px;
+  }
+
+  .saved-book-row button {
+    padding: 6px 7px;
+  }
+}
+
+/* الشاشات الكبيرة جدًا */
+
+@media (min-width: 1600px) {
+  .main-nav,
+  .top-inner,
+  .category-nav-inner,
+  .section,
+  .hero-content {
+    max-width: 1500px;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .cover-wrap {
+    height: 250px;
+  }
+
+  .hero h1 {
+    font-size: 68px;
+  }
+
+  .hero-description {
+    font-size: 18px;
+    max-width: 850px;
+  }
+}
+
+/* الكمبيوتر واللاب توب */
+
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .books-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .cover-wrap {
+    height: 220px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .main-nav {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .cover-wrap {
+    height: 200px;
+  }
+
+  .brand {
+    font-size: 19px;
+  }
+
+  .hero {
+    min-height: 75vh;
+  }
+}
+
+/* التابلت الأفقي */
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .main-nav {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .nav-actions {
+    width: 100%;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .cover-wrap {
+    height: 210px;
+  }
+
+  .hero {
+    min-height: 65vh;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .category-nav-inner {
+    justify-content: flex-start;
+  }
+}
+
+/* الموبايل الكبير والتابلت الصغير */
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .main-nav {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 15px;
+  }
+
+  .brand {
+    justify-content: center;
+    font-size: 19px;
+  }
+
+  .nav-actions {
+    width: 100%;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+  }
+
+  .cover-wrap {
+    height: 220px;
+  }
+
+  .hero {
+    min-height: 65vh;
+  }
+
+  .hero-content {
+    padding: 40px 25px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero-description {
+    font-size: 13px;
+  }
+
+  .category-nav-inner {
+    justify-content: flex-start;
+  }
+
+  .book-modal {
+    width: 100%;
+  }
+}
+
+/* الموبايلات الصغيرة */
+
+@media (max-width: 480px) {
+  .top-inner {
+    padding: 0 10px;
+  }
+
+  .top-actions {
+    gap: 10px;
+  }
+
+  .text-button {
+    font-size: 10px;
+  }
+
+  .main-nav {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .brand {
+    justify-content: center;
+    font-size: 17px;
+  }
+
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 19px;
+  }
+
+  .nav-actions {
+    width: 100%;
+    gap: 7px;
+  }
+
+  .search-wrap {
+    min-width: 0;
+    padding: 0 10px;
+  }
+
+  .search-wrap input {
+    font-size: 11px;
+  }
+
+  .favorites-trigger {
+    padding: 0 10px;
+    font-size: 11px;
+  }
+
+  .hero {
+    min-height: 70vh;
+    min-height: 70svh;
+  }
+
+  .hero-content {
+    padding: 35px 18px;
+  }
+
+  .hero h1 {
+    font-size: clamp(25px, 7vw, 32px);
+  }
+
+  .hero-description {
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .hero-note {
+    display: none;
+  }
+
+  .category-nav-inner {
+    justify-content: flex-start;
+    padding: 7px 10px;
+  }
+
+  .category-card {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  .section {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .intro-row {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 28px;
+  }
+
+  .section-title {
+    font-size: 21px;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .book-card {
+    padding: 7px;
+  }
+
+  .cover-wrap {
+    height: clamp(135px, 45vw, 190px);
+  }
+
+  .book-card h3 {
+    font-size: 12px;
+    min-height: 45px;
+  }
+
+  .book-card .book-description {
+    display: none;
+  }
+
+  .card-actions {
+    gap: 4px;
+  }
+
+  .card-actions button {
+    padding: 7px 3px;
+    font-size: 10px;
+  }
+
+  .card-actions .icon-action {
+    flex-basis: 30px;
+  }
+
+  .modal-backdrop {
+    padding: 10px;
+  }
+
+  .modal {
+    padding: 28px 15px;
+    max-height: 92vh;
+    max-height: 92svh;
+  }
+
+  .book-modal {
+    padding: 25px 12px;
+  }
+
+  .book-reader-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 20px;
+  }
+
+  .reading-paper {
+    padding: 18px 12px;
+  }
+
+  #pageText {
+    font-size: 13px;
+  }
+
+  .reader-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page-number {
+    order: -1;
+    width: 100%;
+  }
+
+  .saved-book-row {
+    gap: 7px;
+    padding: 8px;
+  }
+
+  .saved-book-row button {
+    padding: 6px;
+    font-size: 9px;
+  }
+
+  .search-suggestions {
+    max-height: 270px;
+  }
+}
+
+/* الشاشات شديدة الصغر */
+
+@media (max-width: 350px) {
+  .books-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cover-wrap {
+    height: 260px;
+  }
+
+  .brand {
+    font-size: 15px;
+  }
+
+  .nav-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-wrap,
+  .favorites-trigger {
+    width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 25px;
+  }
+}
+
+/* الشاشات القصيرة بالوضع الأفقي */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: 400px;
+  }
+
+  .modal {
+    max-height: 95vh;
+  }
+}
+
+/* الأجهزة التي لا تستخدم الماوس */
+
+@media (hover: none) {
+  .book-card:hover {
+    transform: none;
+  }
+
+  .book-card:hover .book-cover {
+    transform: none;
+  }
+}
+
+/* تقليل الحركة */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==================================
+   زر العودة إلى أعلى الصفحة
+   ومؤشر التقدم الدائري
+   ================================== */
+
+.scroll-top-button {
+  position: fixed;
+  left: 26px;
+  bottom: 26px;
+  z-index: 180;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--deep);
+  box-shadow: 0 8px 25px rgba(23, 59, 58, .20);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px) scale(.88);
+  transition:
+    opacity .25s ease,
+    transform .25s ease,
+    visibility .25s ease,
+    background .2s ease;
+  cursor: pointer;
+}
+
+.scroll-top-button.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-top-button:hover {
+  background: #f7f5ef;
+  transform: translateY(-3px) scale(1.04);
+}
+
+.scroll-progress-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.scroll-progress-ring circle {
+  fill: none;
+  stroke-width: 3.5;
+}
+
+.scroll-progress-track {
+  stroke: #e8e8df;
+}
+
+.scroll-progress-value {
+  stroke: var(--gold);
+  stroke-linecap: round;
+  transition: stroke-dashoffset .12s linear;
+}
+
+.scroll-top-arrow {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--deep);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1;
+  transition: background .2s ease;
+}
+
+.scroll-top-button:hover .scroll-top-arrow,
+.scroll-top-button.at-bottom .scroll-top-arrow {
+  background: var(--deep-2);
+}
+
+@media (max-width: 600px) {
+  .scroll-top-button {
+    left: 15px;
+    bottom: 17px;
+    width: 52px;
+    height: 52px;
+  }
+}

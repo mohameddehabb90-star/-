@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173b3a">
+  <title>مكتبة المعرفة الرقمية</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header" id="home">
+    <div class="top-strip">
+      <div class="top-inner">
+        <span id="userGreeting">مرحبًا بك في مكتبتك</span>
+        <div class="top-actions">
+          <button class="text-button" id="loginOpen">👤 تسجيل الدخول</button>
+          <button class="text-button" id="readerOpen">◉ Reader <span id="readCount" class="count">0</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-nav-wrap">
+      <div class="main-nav">
+        <a class="brand" href="#home">
+          <span class="brand-icon">▰</span>
+          <span>مكتبة المعرفة الرقمية</span>
+        </a>
+
+        <div class="nav-actions">
+          <div class="search-container">
+            <label class="search-wrap">
+              <span>⌕</span>
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="ابحث عن كتاب أو مجال معرفي..."
+                autocomplete="off"
+                aria-label="البحث عن كتاب"
+                aria-controls="searchSuggestions"
+                aria-expanded="false"
+              >
+            </label>
+            <div
+              class="search-suggestions"
+              id="searchSuggestions"
+              role="listbox"
+              aria-label="اقتراحات البحث"
+              hidden
+            ></div>
+          </div>
+
+          <button class="favorites-trigger" id="favoritesOpen">
+            ♡ المفضلة
+            <span id="favoriteCount" class="count">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow">مساحة للقراءة والاكتشاف</p>
+        <h1>مكتبة المعرفة الرقمية</h1>
+        <p class="hero-description">
+          اكتشف عوالم المعرفة في مكان واحد؛ تصفّح الكتب والمراجع في مجالات
+          تكنولوجيا التعليم والبرمجة والذكاء الاصطناعي والبحث العلمي،
+          واقرأ وتابع كتبك المفضلة بسهولة.
+        </p>
+        <a class="hero-link" href="#booksSection">
+          اكتشف المكتبة <span>←</span>
+        </a>
+      </div>
+      <div class="hero-note">
+        <span>🧐</span> معرفة تتجدد كل يوم
+      </div>
+    </section>
+
+    <nav class="category-nav" aria-label="أقسام المكتبة" id="categoryNav">
+      <div class="category-nav-inner" id="categories"></div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section intro-row" id="booksSection">
+      <div>
+        <p class="eyebrow dark">ابدأ رحلة التعلّم</p>
+        <h2 class="section-title">استكشف مكتبة الكتب</h2>
+        <p class="section-subtitle">
+          اختر المجال الذي تهتم به، أو ابحث عن عنوان محدد.
+        </p>
+      </div>
+      <span class="book-total" id="bookTotal">0 كتاب</span>
+    </section>
+
+    <section class="section books-section">
+      <div class="section-heading">
+        <h2 id="currentCategoryTitle">جميع الكتب</h2>
+        <span class="heading-line"></span>
+      </div>
+      <div class="books-grid" id="books"></div>
+    </section>
+
+    <section class="section secondary-section" id="favoritesSection">
+      <div class="section-heading">
+        <h2>♡ كتبك المفضلة</h2>
+        <span class="heading-line"></span>
+      </div>
+      <div class="books-grid" id="favoriteBooks"></div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="footer-brand" href="#home">مكتبة المعرفة الرقمية</a>
+    <p>بوابتك إلى التعلم والبحث والمعرفة المتجددة</p>
+    <small>© 2026 مكتبة المعرفة الرقمية</small>
+  </footer>
+
+  <div class="modal-backdrop" id="loginModal" aria-hidden="true">
+    <section class="modal login-modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <button class="modal-close" data-close="loginModal" aria-label="إغلاق">×</button>
+      <div class="modal-symbol">♙</div>
+      <p class="eyebrow dark">أهلاً بعودتك</p>
+      <h2 id="loginTitle">تسجيل الدخول</h2>
+      <p class="modal-muted">أدخل بياناتك للترحيب بك داخل المكتبة.</p>
+
+      <form id="loginForm">
+        <label for="loginName">الاسم</label>
+        <input id="loginName" name="name" type="text" placeholder="اكتب اسمك" required>
+
+        <label for="loginEmail">البريد الإلكتروني</label>
+        <input id="loginEmail" name="email" type="email" placeholder="name@example.com" required>
+
+        <button class="primary-button full-button" type="submit">دخول</button>
+      </form>
+
+      <p class="form-note">
+        هذه واجهة دخول تجريبية؛ لا يتم إرسال البيانات إلى خادم.
+      </p>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="readerModal" aria-hidden="true">
+    <section class="modal list-modal" role="dialog" aria-modal="true" aria-labelledby="readerModalTitle">
+      <button class="modal-close" data-close="readerModal" aria-label="إغلاق">×</button>
+      <p class="eyebrow dark">مكتبتك الشخصية</p>
+      <h2 id="readerModalTitle">الكتب التي قرأتها</h2>
+      <p class="modal-muted">اضغط على أي كتاب للعودة إلى القراءة.</p>
+      <div class="saved-books-list" id="readBooksList"></div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="favoritesModal" aria-hidden="true">
+    <section class="modal list-modal" role="dialog" aria-modal="true" aria-labelledby="favoritesModalTitle">
+      <button class="modal-close" data-close="favoritesModal" aria-label="إغلاق">×</button>
+      <p class="eyebrow dark">احتفظ بما تحب</p>
+      <h2 id="favoritesModalTitle">كتبي المفضلة</h2>
+      <p class="modal-muted">كل الكتب التي أضفتها إلى قائمة المفضلة.</p>
+      <div class="saved-books-list" id="favoriteModalList"></div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop reader-backdrop" id="bookModal" aria-hidden="true">
+    <section class="modal book-modal" role="dialog" aria-modal="true" aria-labelledby="readerTitle">
+      <button class="modal-close" data-close="bookModal" aria-label="إغلاق">×</button>
+
+      <div class="book-reader-top">
+        <div>
+          <p class="eyebrow dark">قارئ مكتبة المعرفة الرقمية</p>
+          <h2 id="readerTitle"></h2>
+          <p id="readerAuthor"></p>
+        </div>
+        <button class="outline-button" id="modalFavoriteBtn">♡ أضف للمفضلة</button>
+      </div>
+
+      <div class="chapter-list" id="chapterList"></div>
+
+      <article class="reading-paper">
+        <h3 id="chapterTitle"></h3>
+        <div id="pageText"></div>
+      </article>
+
+      <div class="reader-controls">
+        <button class="outline-button" id="previousBtn">السابق</button>
+        <span class="page-number" id="pageNumber"></span>
+        <button class="primary-button" id="nextBtn">التالي</button>
+      </div>
+
+      <div class="reader-bottom-actions">
+        <button class="eye-button" id="markReadBtn">◉ إضافة إلى الكتب المقروءة</button>
+        <button class="close-reader" data-close="bookModal">إغلاق الكتاب</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
