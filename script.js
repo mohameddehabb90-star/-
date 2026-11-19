@@ -1347,3 +1347,106 @@ refreshLibrary();
 updateGreeting();
 createScrollTopButton();
 loadBookCovers();
+
+
+/* ==================================
+   نظام الأشخاص والملفات الشخصية
+   ================================== */
+
+const people = [
+  "نادر سامى",
+  "محمود وائل",
+  "محمد السعيد",
+  "محمد عمر",
+  "فادى اسحق",
+  "محمد زكريا",
+  "عادل احمد",
+  "مسلم محمود",
+  "احمد محمود",
+  "عماد احمد",
+  "محمد ايهاب",
+  "هدير جمال",
+  "دنيا خالد",
+  "مادونا ابو الخير",
+  "شهد طارق",
+  "مارتينا حماية"
+];
+
+const peopleOpenButton = document.getElementById("peopleOpen");
+const peopleList = document.getElementById("peopleList");
+const peopleListPage = document.getElementById("peopleListPage");
+const personDetailsPage = document.getElementById("personDetailsPage");
+const personName = document.getElementById("personName");
+const peopleBackButton = document.getElementById("peopleBack");
+
+/* أيقونة الشخص */
+
+function personAvatarMarkup() {
+  return `
+    <div class="person-avatar">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"></path>
+      </svg>
+    </div>
+  `;
+}
+
+/* عرض قائمة الأشخاص */
+
+function renderPeopleList() {
+  if (!peopleList) return;
+
+  peopleList.innerHTML = people.map((name, index) => `
+    <button
+      class="person-list-item"
+      type="button"
+      data-person-index="${index}"
+    >
+      ${personAvatarMarkup()}
+      <span>${name}</span>
+    </button>
+  `).join("");
+
+  peopleList.querySelectorAll("[data-person-index]").forEach(button => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.personIndex);
+      showPersonDetails(index);
+    });
+  });
+}
+
+/* عرض معلومات الشخص */
+
+function showPersonDetails(index) {
+  const name = people[index];
+
+  if (!name || !personName) return;
+
+  personName.textContent = name;
+
+  peopleListPage.hidden = true;
+  personDetailsPage.hidden = false;
+}
+
+/* الرجوع إلى قائمة الأشخاص */
+
+function backToPeopleList() {
+  personDetailsPage.hidden = true;
+  peopleListPage.hidden = false;
+}
+
+/* فتح نافذة الأشخاص */
+
+peopleOpenButton?.addEventListener("click", () => {
+  renderPeopleList();
+
+  peopleListPage.hidden = false;
+  personDetailsPage.hidden = true;
+
+  openModal("peopleModal");
+});
+
+/* زر الرجوع */
+
+peopleBackButton?.addEventListener("click", backToPeopleList);
